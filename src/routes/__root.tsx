@@ -14,7 +14,7 @@ import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary";
 import { NotFound } from "../components/NotFound";
 import { TRPCRouter } from "../trpc/router";
 import * as React from "react";
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -48,33 +48,20 @@ function RootDocument(props: Readonly<{ children: React.ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      <body>
-        <Flex gap={2} px={6} py={3} fontSize="lg">
-          <Link
-            to="/"
-            activeProps={{
-              className: "font-bold",
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Home
-          </Link>
-          <Link
-            to="/test-form"
-            activeProps={{
-              className: "font-bold",
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Test Form
-          </Link>
-        </Flex>
+      <Box as="body" backgroundColor="gray.50">
+        <Container>
+          <Flex gap={2} py={3} fontSize="xl" backgroundColor="white">
+            <Link to="/" activeOptions={{ exact: true }}>
+              Accueil
+            </Link>
+          </Flex>
+        </Container>
         <hr />
         <Container pt={4}>{props.children}</Container>
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
-      </body>
+      </Box>
     </html>
   );
 }

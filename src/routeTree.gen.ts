@@ -11,28 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TestFormImport } from './routes/test-form'
 import { Route as RedirectImport } from './routes/redirect'
-import { Route as PostsImport } from './routes/posts'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
-const TestFormRoute = TestFormImport.update({
-  id: '/test-form',
-  path: '/test-form',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const RedirectRoute = RedirectImport.update({
   id: '/redirect',
   path: '/redirect',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PostsRoute = PostsImport.update({
-  id: '/posts',
-  path: '/posts',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,25 +39,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/posts': {
-      id: '/posts'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsImport
-      parentRoute: typeof rootRoute
-    }
     '/redirect': {
       id: '/redirect'
       path: '/redirect'
       fullPath: '/redirect'
       preLoaderRoute: typeof RedirectImport
-      parentRoute: typeof rootRoute
-    }
-    '/test-form': {
-      id: '/test-form'
-      path: '/test-form'
-      fullPath: '/test-form'
-      preLoaderRoute: typeof TestFormImport
       parentRoute: typeof rootRoute
     }
   }
@@ -81,47 +53,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/posts': typeof PostsRoute
   '/redirect': typeof RedirectRoute
-  '/test-form': typeof TestFormRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/posts': typeof PostsRoute
   '/redirect': typeof RedirectRoute
-  '/test-form': typeof TestFormRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/posts': typeof PostsRoute
   '/redirect': typeof RedirectRoute
-  '/test-form': typeof TestFormRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/posts' | '/redirect' | '/test-form'
+  fullPaths: '/' | '/redirect'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/posts' | '/redirect' | '/test-form'
-  id: '__root__' | '/' | '/posts' | '/redirect' | '/test-form'
+  to: '/' | '/redirect'
+  id: '__root__' | '/' | '/redirect'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PostsRoute: typeof PostsRoute
   RedirectRoute: typeof RedirectRoute
-  TestFormRoute: typeof TestFormRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PostsRoute: PostsRoute,
   RedirectRoute: RedirectRoute,
-  TestFormRoute: TestFormRoute,
 }
 
 export const routeTree = rootRoute
@@ -135,22 +97,14 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/posts",
-        "/redirect",
-        "/test-form"
+        "/redirect"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/posts": {
-      "filePath": "posts.tsx"
-    },
     "/redirect": {
       "filePath": "redirect.tsx"
-    },
-    "/test-form": {
-      "filePath": "test-form.tsx"
     }
   }
 }
